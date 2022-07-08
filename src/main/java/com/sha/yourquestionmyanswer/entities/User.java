@@ -10,8 +10,8 @@ import javax.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    User user;
 
     @Column(name = "username", nullable = false)
     String username;

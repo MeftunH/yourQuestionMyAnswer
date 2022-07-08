@@ -12,8 +12,9 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(name = "user_id", nullable = false)
-    Long userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id", nullable = false)
+    User user;
 
     @Column(name = "title", nullable = false)
     String title;

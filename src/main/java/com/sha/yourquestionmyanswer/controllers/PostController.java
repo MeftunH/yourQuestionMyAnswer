@@ -20,4 +20,9 @@ public class PostController {
     public List<Post> getAllPosts(@RequestParam Optional<Long> userId) {
        return postService.getPost(userId);
     }
+
+    @GetMapping("/{id}")
+    public Post getPost(@PathVariable Long id) {
+        return postService.findById(id);
+    }
 }

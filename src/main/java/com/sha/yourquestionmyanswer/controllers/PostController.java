@@ -1,6 +1,7 @@
 package com.sha.yourquestionmyanswer.controllers;
 
 import com.sha.yourquestionmyanswer.entities.Post;
+import com.sha.yourquestionmyanswer.requests.PostCreateRequest;
 import com.sha.yourquestionmyanswer.services.PostService;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,7 @@ public class PostController {
     }
 
     @PostMapping
-    public Post createPost(@RequestBody Post post) {
-        return postService.create(post);
+    public Post createPost(@RequestBody PostCreateRequest request) {
+        return postService.create(request);
     }
 }

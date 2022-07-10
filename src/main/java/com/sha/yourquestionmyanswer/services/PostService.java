@@ -49,4 +49,11 @@ public class PostService {
        toSave.setUser(user);
        return postRepository.save(toSave);
     }
+
+    public Post updateById(Long id) {
+    }
+
+    public void deleteById(Long id) {
+        postRepository.deleteById(id);
+    }
 }

@@ -25,4 +25,9 @@ public class PostController {
     public Post getPost(@PathVariable Long id) {
         return postService.findById(id);
     }
+
+    @PostMapping
+    public Post createPost(@RequestBody Post post) {
+        return postService.create(post);
+    }
 }

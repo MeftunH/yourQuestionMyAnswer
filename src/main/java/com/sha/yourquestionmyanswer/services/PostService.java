@@ -4,6 +4,7 @@ import com.sha.yourquestionmyanswer.entities.Post;
 import com.sha.yourquestionmyanswer.entities.User;
 import com.sha.yourquestionmyanswer.repos.PostRepository;
 import com.sha.yourquestionmyanswer.requests.PostCreateRequest;
+import com.sha.yourquestionmyanswer.requests.PostUpdateRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -50,7 +51,15 @@ public class PostService {
        return postRepository.save(toSave);
     }
 
-    public Post updateById(Long id) {
+    public Post updateById(Long id, PostUpdateRequest request) {
+        Optional<Post> post = postRepository.findById(id);
+        if (post.isPresent()) {
+            Post toUpdate = post.get();
+            toUpdate.setText(request.getText());
+            toUpdate.setTitle(request.getTitle());
+            return postRepository.save(toUpdate);
+        }
+        return null;
     }
 
     public void deleteById(Long id) {

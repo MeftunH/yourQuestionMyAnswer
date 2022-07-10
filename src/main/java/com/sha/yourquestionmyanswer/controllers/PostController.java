@@ -2,6 +2,7 @@ package com.sha.yourquestionmyanswer.controllers;
 
 import com.sha.yourquestionmyanswer.entities.Post;
 import com.sha.yourquestionmyanswer.requests.PostCreateRequest;
+import com.sha.yourquestionmyanswer.requests.PostUpdateRequest;
 import com.sha.yourquestionmyanswer.services.PostService;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,8 +34,8 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    public Post updatePost(@PathVariable Long id) {
-        return postService.updateById(id);
+    public Post updatePost(@PathVariable Long id, @RequestBody PostUpdateRequest request) {
+        return postService.updateById(id,request);
     }
 
     @DeleteMapping("/{id}")

@@ -2,6 +2,7 @@ package com.sha.yourquestionmyanswer.controllers;
 
 import com.sha.yourquestionmyanswer.entities.Comment;
 import com.sha.yourquestionmyanswer.requests.CommentCreateRequest;
+import com.sha.yourquestionmyanswer.requests.CommentUpdateRequest;
 import com.sha.yourquestionmyanswer.services.CommentService;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +35,9 @@ public class CommentController {
         return commentService.create(request);
     }
 
-
+    @PutMapping("/{id}")
+    public Comment updateComment(@PathVariable Long id, @RequestBody CommentUpdateRequest request) {
+        return commentService.updateById(id,request);
+    }
 
 }

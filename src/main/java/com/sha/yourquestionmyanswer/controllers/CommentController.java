@@ -2,10 +2,7 @@ package com.sha.yourquestionmyanswer.controllers;
 
 import com.sha.yourquestionmyanswer.entities.Comment;
 import com.sha.yourquestionmyanswer.services.CommentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,5 +23,9 @@ public class CommentController {
         return commentService.getAllComments(userId, postId);
     }
 
+    @GetMapping("/{id}")
+    public Comment getComment(@PathVariable Long id) {
+        return commentService.findById(id);
+    }
 
 }

@@ -32,4 +32,8 @@ public class CommentService {
             return commentRepository.findAll();
         }
     }
+
+    public Comment findById(Long id) {
+        return commentRepository.findById(id).orElse(null);
+    }
 }

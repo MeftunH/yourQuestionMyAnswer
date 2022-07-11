@@ -23,7 +23,8 @@ public class CommentController {
     public List<Comment> getAllComments(@RequestParam Optional<Long> userId,
                                         @RequestParam Optional<Long> postId)
     {
-        return commentService.getAllComments();
+        return commentService.getAllComments(userId, postId);
     }
+
 
 }

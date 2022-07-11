@@ -18,8 +18,10 @@ public class CommentService {
     PostService postService;
     UserService userService;
 
-    public CommentService(CommentRepository commentRepository) {
+    public CommentService(CommentRepository commentRepository, PostService postService, UserService userService) {
         this.commentRepository = commentRepository;
+        this.postService = postService;
+        this.userService = userService;
     }
 
     public List<Comment> getAllComments(@RequestParam Optional<Long> userId,

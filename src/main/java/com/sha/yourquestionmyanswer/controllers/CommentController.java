@@ -40,4 +40,9 @@ public class CommentController {
         return commentService.updateById(id,request);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteComment(@PathVariable Long id) {
+        commentService.deleteById(id);
+    }
+
 }

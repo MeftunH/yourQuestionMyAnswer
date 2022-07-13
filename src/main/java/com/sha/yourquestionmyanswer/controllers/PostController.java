@@ -3,6 +3,7 @@ package com.sha.yourquestionmyanswer.controllers;
 import com.sha.yourquestionmyanswer.entities.Post;
 import com.sha.yourquestionmyanswer.requests.PostCreateRequest;
 import com.sha.yourquestionmyanswer.requests.PostUpdateRequest;
+import com.sha.yourquestionmyanswer.response.PostResponse;
 import com.sha.yourquestionmyanswer.services.PostService;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class PostController {
     }
 
     @GetMapping
-    public List<Post> getAllPosts(@RequestParam Optional<Long> userId) {
+    public List<PostResponse> getAllPosts(@RequestParam Optional<Long> userId) {
        return postService.getPost(userId);
     }
 
@@ -42,4 +43,6 @@ public class PostController {
     public void deletePost(@PathVariable Long id) {
         postService.deleteById(id);
     }
+
+
 }

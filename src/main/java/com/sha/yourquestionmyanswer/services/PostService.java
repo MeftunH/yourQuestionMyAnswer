@@ -5,10 +5,12 @@ import com.sha.yourquestionmyanswer.entities.User;
 import com.sha.yourquestionmyanswer.repos.PostRepository;
 import com.sha.yourquestionmyanswer.requests.PostCreateRequest;
 import com.sha.yourquestionmyanswer.requests.PostUpdateRequest;
+import com.sha.yourquestionmyanswer.response.PostResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -27,11 +29,16 @@ public class PostService {
         return postRepository.findByUserId(userId);
     }
 
-    public List<Post> getPost(Optional<Long> userId) {
+    public List<PostResponse> getPost(Optional<Long> userId) {
+        List<Post> posts;
         if (userId.isPresent()) {
-            return findAllByUserId(userId.get());
+             posts = findAllByUserId(userId.get());
         }
-        return findAll();
+        else{
+            posts = findAll();
+            return posts.stream().map(p-> new PostResponse(p)).collect(Collectors.toList());
+        }
+        return null;
     }
 
     public Post findById(Long id) {

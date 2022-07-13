@@ -8,6 +8,7 @@ import com.sha.yourquestionmyanswer.requests.PostUpdateRequest;
 import com.sha.yourquestionmyanswer.response.PostResponse;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -55,6 +56,7 @@ public class PostService {
        toSave.setText(request.getText());
        toSave.setTitle(request.getTitle());
        toSave.setUser(user);
+       toSave.setCreatedAt(LocalDateTime.now());
        return postRepository.save(toSave);
     }
 

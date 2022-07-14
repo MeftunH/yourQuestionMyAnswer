@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/likes")
+@RequestMapping("/api/v1/likes")
 public class LikeController {
     private LikeService likeService;
 

@@ -7,6 +7,7 @@ import com.sha.yourquestionmyanswer.requests.PostCreateRequest;
 import com.sha.yourquestionmyanswer.requests.PostUpdateRequest;
 import com.sha.yourquestionmyanswer.response.LikeResponse;
 import com.sha.yourquestionmyanswer.response.PostResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -18,6 +19,8 @@ import java.util.stream.Collectors;
 public class PostService {
     private PostRepository postRepository;
     private UserService userService;
+
+    @Autowired
     private LikeService likeService;
     public List<Post> findAll() {
         return postRepository.findAll();
@@ -28,9 +31,6 @@ public class PostService {
     public PostService(PostRepository postRepository, UserService userService) {
         this.postRepository = postRepository;
         this.userService = userService;
-    }
-    public void setLikeService(LikeService likeService) {
-        this.likeService = likeService;
     }
 
     public List<Post> findAllByUserId(Long userId) {
@@ -45,7 +45,7 @@ public class PostService {
         else{
             posts = findAll();
             return posts.stream().map(p-> {
-                List<LikeResponse> likes = likeService.getAllLikes(null,Optional.of(p.getId()));
+                List<LikeResponse> likes = likeService.getAllLikes(Optional.ofNullable(null),Optional.of(p.getId()));
                 return new PostResponse(p,likes);
             }).collect(Collectors.toList());
         }

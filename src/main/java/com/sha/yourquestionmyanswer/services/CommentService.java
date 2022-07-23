@@ -9,6 +9,7 @@ import com.sha.yourquestionmyanswer.requests.CommentUpdateRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,6 +52,7 @@ public class CommentService {
             toSave.setText(request.getText());
             toSave.setUser(user);
             toSave.setPost(post);
+            toSave.setCreatedAt(LocalDateTime.now());
             return commentRepository.save(toSave);
         }
         return null;

@@ -5,6 +5,7 @@ import com.sha.yourquestionmyanswer.entities.Post;
 import com.sha.yourquestionmyanswer.entities.User;
 import com.sha.yourquestionmyanswer.repos.LikeRepository;
 import com.sha.yourquestionmyanswer.requests.CommentCreateRequest;
+import com.sha.yourquestionmyanswer.requests.LikeCreateRequest;
 import com.sha.yourquestionmyanswer.response.LikeResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,7 +45,7 @@ public class LikeService {
         return likeRepository.findById(id).orElse(null);
     }
 
-    public Like create(Like like, CommentCreateRequest request) {
+    public Like create(LikeCreateRequest request) {
         User user = userService.findById(request.getUserId());
         Post post = postService.findById(request.getPostId());
         if (!(user == null || post == null)) {

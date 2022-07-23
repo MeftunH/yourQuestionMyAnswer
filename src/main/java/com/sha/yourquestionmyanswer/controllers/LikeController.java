@@ -2,6 +2,7 @@ package com.sha.yourquestionmyanswer.controllers;
 
 import com.sha.yourquestionmyanswer.entities.Like;
 import com.sha.yourquestionmyanswer.requests.CommentCreateRequest;
+import com.sha.yourquestionmyanswer.requests.LikeCreateRequest;
 import com.sha.yourquestionmyanswer.response.LikeResponse;
 import com.sha.yourquestionmyanswer.services.LikeService;
 import org.springframework.web.bind.annotation.*;
@@ -30,8 +31,8 @@ public class LikeController {
     }
 
     @PostMapping
-    public Like createLike(@RequestBody Like like, @RequestBody CommentCreateRequest request) {
-        return likeService.create(like,request);
+    public Like createLike(@RequestBody LikeCreateRequest request) {
+        return likeService.create(request);
     }
 
     @DeleteMapping("/{id}")

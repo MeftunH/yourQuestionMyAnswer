@@ -5,6 +5,7 @@ import com.sha.yourquestionmyanswer.entities.User;
 import com.sha.yourquestionmyanswer.repos.PostRepository;
 import com.sha.yourquestionmyanswer.requests.PostCreateRequest;
 import com.sha.yourquestionmyanswer.requests.PostUpdateRequest;
+import com.sha.yourquestionmyanswer.response.LikeResponse;
 import com.sha.yourquestionmyanswer.response.PostResponse;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +18,19 @@ import java.util.stream.Collectors;
 public class PostService {
     private PostRepository postRepository;
     private UserService userService;
+    private LikeService likeService;
     public List<Post> findAll() {
         return postRepository.findAll();
     }
 
+
+
     public PostService(PostRepository postRepository, UserService userService) {
         this.postRepository = postRepository;
         this.userService = userService;
+    }
+    public void setLikeService(LikeService likeService) {
+        this.likeService = likeService;
     }
 
     public List<Post> findAllByUserId(Long userId) {
@@ -37,7 +44,10 @@ public class PostService {
         }
         else{
             posts = findAll();
-            return posts.stream().map(p-> new PostResponse(p)).collect(Collectors.toList());
+            return posts.stream().map(p-> {
+                List<LikeResponse> likes = likeService.getAllLikes(null,Optional.of(p.getId()));
+                return new PostResponse(p,likes);
+            }).collect(Collectors.toList());
         }
         return null;
     }

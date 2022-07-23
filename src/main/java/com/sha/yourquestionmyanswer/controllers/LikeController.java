@@ -2,6 +2,7 @@ package com.sha.yourquestionmyanswer.controllers;
 
 import com.sha.yourquestionmyanswer.entities.Like;
 import com.sha.yourquestionmyanswer.requests.CommentCreateRequest;
+import com.sha.yourquestionmyanswer.response.LikeResponse;
 import com.sha.yourquestionmyanswer.services.LikeService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +19,8 @@ public class LikeController {
     }
 
     @GetMapping
-    public List<Like> getAllLikes(@RequestParam Optional<Long> userId,
-                                  @RequestParam Optional<Long> postId) {
+    public List<LikeResponse> getAllLikes(@RequestParam Optional<Long> userId,
+                                          @RequestParam Optional<Long> postId) {
         return likeService.getAllLikes(userId, postId);
     }
 

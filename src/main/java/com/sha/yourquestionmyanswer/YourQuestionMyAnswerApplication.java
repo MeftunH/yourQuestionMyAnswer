@@ -10,7 +10,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
 
-@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
 public class YourQuestionMyAnswerApplication {
 
     public static void main(String[] args) {

@@ -1,8 +1,6 @@
 package com.sha.yourquestionmyanswer.security;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -29,20 +27,30 @@ public class JwtTokenProvider {
                .compact();
     }
 
-    public boolean validateToken(String token) {
-        try {
-            Jwts.parser().setSigningKey(APP_SECRET).parseClaimsJws(token);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
     Long getUserIdFromJwtToken(String token) {
         Claims claims = Jwts.parser()
                 .setSigningKey(APP_SECRET)
                 .parseClaimsJws(token)
                 .getBody();
         return Long.parseLong(claims.getSubject());
+    }
+
+    boolean validateToken(String token) {
+      try {
+          Jwts.parser().setSigningKey(APP_SECRET).parseClaimsJws(token);
+          return !isTokenExpired(token);
+      } catch (SignatureException | MalformedJwtException | ExpiredJwtException | UnsupportedJwtException |
+               IllegalArgumentException e) {
+            return false;
+      }
+    }
+
+    private boolean isTokenExpired(String token) {
+        Date expiration = Jwts.parser()
+                .setSigningKey(APP_SECRET)
+                .parseClaimsJws(token)
+                .getBody()
+                .getExpiration();
+        return expiration.before(new Date());
     }
 }

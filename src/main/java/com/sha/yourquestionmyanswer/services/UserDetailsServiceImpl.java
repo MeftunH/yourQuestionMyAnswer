@@ -21,4 +21,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return JwtUserDetails.create(user);
     }
 
+    public UserDetails loadUserById(Long id) throws UsernameNotFoundException {
+        User user = userRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return JwtUserDetails.create(user);
+    }
+
 }

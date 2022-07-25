@@ -14,6 +14,12 @@ public class JwtUserDetails implements UserDetails {
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
 
+    public JwtUserDetails(Long id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.authorities = authorities;
+    }
 
     @Override
     public boolean isAccountNonExpired() {
